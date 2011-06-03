@@ -46,13 +46,16 @@ jQuery.eventWatcher = (function(){
            text: getText(e.target),
            path: getElementCSSPath(e.target),
            url: window.location.pathname,
-           client:{x:e.clientX, y:e.clientY}
+           client:{x:e.clientX, y:e.clientY},
+           local:e.target.localName
           }
           if (opts.custom)
             result.custom = opts.custom;
-
-          o.trigger(event_name, result)
-          o.trigger("all", result)
+          
+          if (result.text != "") {
+            o.trigger(event_name, result)
+            o.trigger("all", result)
+          };
         }
       );  
     })
