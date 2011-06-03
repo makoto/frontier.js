@@ -1,7 +1,7 @@
 
 PathFinder = {}
-PathFinder.init = function(container){
-  if (!container)
+PathFinder.init = function(opts){
+  if (!opts.container)
     container = document;
 
   $(container).click(
@@ -13,6 +13,10 @@ PathFinder.init = function(container){
        path:PathFinder.getElementCSSPath(e.target),
        url: window.location.pathname,
       }
+
+      if (opts.custom)
+        result.custom = opts.custom;
+
       $(this).trigger("PathFinder.clicked", result)
     }
   );  
