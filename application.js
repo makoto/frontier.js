@@ -1,6 +1,6 @@
 // 
 $(function(){
-  o = $.pathFinder({
+  o = $.eventWatcher({
     collection:"html",  // Optional
     events:["click", "mousemove"],  // Optional
     custom:{

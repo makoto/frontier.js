@@ -1,4 +1,4 @@
-jQuery.pathFinder = (function(){
+jQuery.eventWatcher = (function(){
   var o = {
 
     event_stack: function (evt_name) {
@@ -24,7 +24,7 @@ jQuery.pathFinder = (function(){
     } 
   }
     
-  function pathFinder(opts){
+  function eventWatcher(opts){
     if (!opts.container)
       container = document;
 
@@ -106,5 +106,5 @@ jQuery.pathFinder = (function(){
       return paths.length ? paths.join(" ") : null;
   };
 
-  return pathFinder
+  return eventWatcher
 })();
