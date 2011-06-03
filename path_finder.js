@@ -1,8 +1,30 @@
-PathFinder = (function(){
+jQuery.pathFinder = (function(){
+  var o = {
 
-  var PathFinder = {}
+    event_stack: function (evt_name) {
+      this._events = this._events || {};
+      this._events[evt_name] = this._events[evt_name] || [];
+      return this._events[evt_name];
+    },
 
-  PathFinder.init = function(opts){
+    bind: function (evt_name, handler) {
+      this.event_stack(evt_name).push(handler);
+      return this;
+    },
+
+    trigger: function (evt_name) {
+      var args = arguments[1] || [];
+      var stack = this.event_stack(evt_name);
+      for(var i = 0;i<stack.length;i++) {
+        // This does not work.
+        // stack[i].apply(this, args);
+        stack[i](args);
+      }
+      return this;
+    } 
+  }
+    
+  function pathFinder(opts){
     if (!opts.container)
       container = document;
 
@@ -18,7 +40,6 @@ PathFinder = (function(){
     events.forEach(function(event_name){
       $(container).bind(event_name,
         function(e){
-          console.log(event_name);
           var result = {
            time: new Date,
            event_name:event_name,
@@ -26,16 +47,21 @@ PathFinder = (function(){
            path: getElementCSSPath(e.target),
            url: window.location.pathname,
           }
-          console.log(result);
           if (opts.custom)
             result.custom = opts.custom;
 
-          $(this).trigger("PathFinder." + event_name, result)
-          $(this).trigger("PathFinder.all", result)
+          o.trigger(event_name, result)
+          o.trigger("all", result)
         }
       );  
     })
+    return o
   }
+
+  // Add here if you want to have some public class method in future 
+  // PathFinder.someMethod = function(){
+  // 
+  // }
 
   function getText(e) {
     var text = null;
@@ -80,5 +106,5 @@ PathFinder = (function(){
       return paths.length ? paths.join(" ") : null;
   };
 
-  return PathFinder
+  return pathFinder
 })();
