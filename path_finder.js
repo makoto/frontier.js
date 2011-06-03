@@ -1,7 +1,37 @@
-// This code is taken from
-// http://code.google.com/p/fbug/source/browse/branches/firebug1.6/content/firebug/lib.js
 
 PathFinder = {}
+PathFinder.init = function(container){
+  if (!container)
+    container = document;
+
+  $(container).click(
+    function(e){
+      var result = {
+       // time: new Date,
+       event_name:"click",
+       text:PathFinder.getText(e.target),
+       path:PathFinder.getElementCSSPath(e.target),
+       url: window.location.pathname,
+      }
+      $(this).trigger("PathFinder.clicked", result)
+    }
+  );  
+}
+
+PathFinder.getText = function(e) {
+  var text = null;
+  if ($(e).text()){
+    text = $(e).text();
+  }else if ($(e).attr("value")){
+    text = $(e).attr("value");
+  }else{
+    text = "ERROR"
+  }
+  return text;
+}
+
+// getElementXPath, getElementTreeXPath, getElementCSSPath, getElementCSSSelector are taken from
+// http://code.google.com/p/fbug/source/browse/branches/firebug1.6/content/firebug/lib.js
 PathFinder.getElementXPath = function(element)
 {
     var getElementTreeXPath = function(element)
