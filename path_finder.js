@@ -7,7 +7,7 @@ PathFinder.init = function(container){
   $(container).click(
     function(e){
       var result = {
-       // time: new Date,
+       time: new Date,
        event_name:"click",
        text:PathFinder.getText(e.target),
        path:PathFinder.getElementCSSPath(e.target),
