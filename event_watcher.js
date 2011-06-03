@@ -36,7 +36,7 @@ jQuery.eventWatcher = (function(){
     }else{
       events = opts.events
     };
-
+    
     events.forEach(function(event_name){
       $(container).bind(event_name,
         function(e){
@@ -46,6 +46,7 @@ jQuery.eventWatcher = (function(){
            text: getText(e.target),
            path: getElementCSSPath(e.target),
            url: window.location.pathname,
+           client:{x:e.clientX, y:e.clientY}
           }
           if (opts.custom)
             result.custom = opts.custom;
