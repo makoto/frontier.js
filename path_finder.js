@@ -21,7 +21,8 @@ PathFinder.init = function(container){
 PathFinder.getText = function(e) {
   var text = null;
   if ($(e).text()){
-    text = $(e).text();
+    // Filter out child elements. nodeType 3 means text.
+    text = $(e).contents().filter(function(){return this.nodeType === 3}).text().trim()
   }else if ($(e).attr("value")){
     text = $(e).attr("value");
   }else{

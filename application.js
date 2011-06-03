@@ -1,9 +1,8 @@
 
 // 
 $(document).ready(function(){
-  PathFinder.init("div.main");
+  PathFinder.init();
   $(document).bind("PathFinder.clicked", function(e, result){
     console.log(JSON.stringify(result));
   });
-  
 });
