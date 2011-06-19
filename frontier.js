@@ -1,4 +1,4 @@
-jQuery.eventWatcher = (function(){
+jQuery.frontier = (function(){
   var o = {
 
     event_stack: function (evt_name) {
@@ -30,7 +30,7 @@ jQuery.eventWatcher = (function(){
     } 
   }
     
-  function eventWatcher(opts){
+  function frontier(opts){
     if (!opts.container)
       container = document;
 
@@ -120,5 +120,5 @@ jQuery.eventWatcher = (function(){
       return paths.length ? paths.join(" ") : null;
   };
 
-  return eventWatcher
+  return frontier
 })();

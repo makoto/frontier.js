@@ -1,12 +1,12 @@
-# Event Watcher
+# frontier.js
 
 ## Functionality
 
-Captures any event.
+Captures any js event.
 
 ### Example
 
-		o = $.eventWatcher({
+		o = $.frontier({
 		  collection:"html",  // Optional
 		  events:["click", "mousemove"],  // Optional
 		  custom:{ // Optional
@@ -39,27 +39,27 @@ Captures any event.
 
 ## Custom Events
 
-After "	$.eventWatcher()" is called, it returns the scope which you can bind any actions. 
+After "	$.frontier()" is called, it returns the scope which you can bind any actions. 
 
 
 ## Event binding examples
 
 - Output to console (for debugging)
 
-		$.eventWatcher().bind('click', function(result){
+		$.frontier().bind('click', function(result){
 		  console.log(JSON.stringify(result));
 		});
 
 - Send to Google Analytics
 
-		$.eventWatcher().bind('click', function(result){
+		$.frontier().bind('click', function(result){
 		  url = result.url + "#/" + result.path.replace(/ /g,"-")
 		  pageTracker._trackPageview(url);
 		});
 
 - Send back to server (You can have /logger API end point to log all client activities)
 
-		$.eventWatcher().bind('click', function(result){
+		$.frontier().bind('click', function(result){
 		  $.ajax({
 		    type: 'POST',
 		    url: '/logger,
@@ -70,13 +70,13 @@ After "	$.eventWatcher()" is called, it returns the scope which you can bind any
 - Send to cross domain via WebSocket (If you want to capture & send a lot of data)
 
 		var socket = new WebSocket('ws://game.example.com:12010/logger');
-		$.eventWatcher().bind('mousemove', function(result){
+		$.frontier().bind('mousemove', function(result){
 			socket.send(JSON.stringify(result))
 		});
 		
 - Store to local storage (If you want to store activities across different pages)
 
-		$.eventWatcher().bind('click', function(result){
+		$.frontier().bind('click', function(result){
 			sessionStorage.setItem(result.time.valueOf(), JSON.stringify(result))
 		});
 

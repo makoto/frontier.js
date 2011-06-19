@@ -1,5 +1,5 @@
 $(function(){
-  o = $.eventWatcher({
+  o = $.frontier({
     collection:"html",  // Optional
     events:["click", "mousemove"],  // Optional
     custom:{
