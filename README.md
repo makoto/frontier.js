@@ -9,14 +9,14 @@ Captures any event.
 		o = $.eventWatcher({
 		  collection:"html",  // Optional
 		  events:["click", "mousemove"],  // Optional
-		  custom:{
+		  custom:{ // Optional
 		    session_id:123
 		  }
-		}).bind("all", function(result){
+		}).bind("all", function(result){ // Bind to all events
 		  console.log(JSON.stringify(result));
 		});
 
-		o.bind('click', function(result){
+		o.bind('click', function(result){ // Bind to specific event
 			console.log('you can also call this way')
 		})
 
@@ -39,14 +39,12 @@ Captures any event.
 
 ## Custom Events
 
-You can bind to all the events you monitor. The below are the conventions.
+After "	$.eventWatcher()" is called, it returns the scope which you can bind any actions. 
 
-- "PathFinder" + event name (eg: "PathFinder.click")
-- "PathFinder.all" to bind all events.
 
 ## Event binding examples
 
-- Output to console
+- Output to console (for debugging)
 
 		$.eventWatcher().bind('click', function(result){
 		  console.log(JSON.stringify(result));
@@ -59,7 +57,7 @@ You can bind to all the events you monitor. The below are the conventions.
 		  pageTracker._trackPageview(url);
 		});
 
-- Send back to server
+- Send back to server (You can have /logger API end point to log all client activities)
 
 		$.eventWatcher().bind('click', function(result){
 		  $.ajax({
@@ -69,11 +67,17 @@ You can bind to all the events you monitor. The below are the conventions.
 		  });
 		});
 
-- Send to cross domain via WebSocket
+- Send to cross domain via WebSocket (If you want to capture & send a lot of data)
 
 		var socket = new WebSocket('ws://game.example.com:12010/logger');
-		$.eventWatcher().bind('click', function(result){
+		$.eventWatcher().bind('mousemove', function(result){
 			socket.send(JSON.stringify(result))
+		});
+		
+- Store to local storage (If you want to store activities across different pages)
+
+		$.eventWatcher().bind('click', function(result){
+			sessionStorage.setItem(result.time.valueOf(), JSON.stringify(result))
 		});
 
 

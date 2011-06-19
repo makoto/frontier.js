@@ -8,7 +8,13 @@ jQuery.eventWatcher = (function(){
     },
 
     bind: function (evt_name, handler) {
-      this.event_stack(evt_name).push(handler);
+      if (typeof(evt_name) == "string") {
+        evt_name = [evt_name]
+      };
+      for(var i = 0;i<evt_name.length;i++) {
+        this.event_stack(evt_name[i]).push(handler);
+      }
+      
       return this;
     },
 
@@ -32,7 +38,11 @@ jQuery.eventWatcher = (function(){
     if (!opts.events) {
       events =  ["click"]
     }else if (opts.events == "all" || opts.events == ["all"]){
-      events =  ["blur", "focus", "focusin", "focusout", "load", "resize", "scroll", "unload", "click", "dblclick", "mousedown", "mouseup", "mousemove", "mouseover", "mouseout", "mouseenter", "mouseleave", "change", "select", "submit", "keydown", "keypress", "keyup", "error"] 
+      events =  [
+        "blur", "focus", "focusin", "focusout", "load", "resize", "scroll", "unload", "click", "dblclick", 
+        "mousedown", "mouseup", "mousemove", "mouseover", "mouseout", "mouseenter", "mouseleave", "change", 
+        "select", "submit", "keydown", "keypress", "keyup", "error"
+      ] 
     }else{
       events = opts.events
     };
