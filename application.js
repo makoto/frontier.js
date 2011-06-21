@@ -1,7 +1,7 @@
 $(function(){
   o = $.frontier({
     collection:"html",  // Optional
-    events:["click", "mousemove"],  // Optional
+    events:["click", "mousemove","beforeunload", "load", "unload"],  // Optional
     custom:{
       session_id:123
     }
@@ -22,9 +22,17 @@ $(function(){
     console.log('Delegate')
     return false
   })
-  o.bind('click', function(result){
+  o.bind("all", function(result){
+    console.log(result.event_name)
+  })
+  o.bind(['click', 'load'], function(result){
     $('#output').text(JSON.stringify(result));
   })
   
+  o.bind('beforeunload', function(result){
+    $('#output').text(JSON.stringify(result));
+    alert("about to exist");
+  })
+
 });
 

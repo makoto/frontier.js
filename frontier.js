@@ -41,14 +41,14 @@ jQuery.frontier = (function(){
       events =  [
         "blur", "focus", "focusin", "focusout", "load", "resize", "scroll", "unload", "click", "dblclick", 
         "mousedown", "mouseup", "mousemove", "mouseover", "mouseout", "mouseenter", "mouseleave", "change", 
-        "select", "submit", "keydown", "keypress", "keyup", "error"
+        "select", "submit", "keydown", "keypress", "keyup", "error", "beforeunload"
       ] 
     }else{
       events = opts.events
     };
     
     events.forEach(function(event_name){
-      $(container).bind(event_name,
+      $(window).bind(event_name,
         function(e){
           var result = {
            time: new Date,
