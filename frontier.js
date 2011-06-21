@@ -61,11 +61,9 @@ jQuery.frontier = (function(){
           }
           if (opts.custom)
             result.custom = opts.custom;
-          
-          if (result.text != "") {
-            o.trigger(event_name, result)
-            o.trigger("all", result)
-          };
+
+          o.trigger(event_name, result)
+          o.trigger("all", result)
         }
       );  
     })
