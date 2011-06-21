@@ -1,4 +1,4 @@
-# frontier.js
+# frontier.js (NOT READY FOR THE PUBLIC USE YET)
 
 ## Functionality
 
@@ -85,6 +85,10 @@ After "	$.frontier()" is called, it returns the scope which you can bind any act
 
 - Figure out how to capture form fields.
 - Figure out how to write a test which can mock DOM event (eg: click, mouse over.)
+
+## FAQ
+
+- Why this is jQuery plugin? = I can make this jQuery independent, but this library heavily depends on DOM event, so no point separating it out for now.
 
 ## Credit
 
