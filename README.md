@@ -83,7 +83,8 @@ After "	$.frontier()" is called, it returns the scope which you can bind any act
 
 ## TODO
 
-- Figure out why some of events are not get captured.
+- Figure out how to capture form fields.
+- Figure out how to write a test which can mock DOM event (eg: click, mouse over.)
 
 ## Credit
 
